@@ -53,10 +53,13 @@ Have fun !
 
 == Changelog ==
 
+= 1.0.1 = 
+* Add Banners
+
 = 1.0.0 = 
 * Initial release
 
 == Frequently Asked Questions ==
 
  
-InfoVersion:a3a1f8fe971335a48db5027cc18096524173c333
+InfoVersion:8e13d119c352dee83a9db847f9a907fe6c244ca5
