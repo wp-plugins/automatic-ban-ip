@@ -3,7 +3,7 @@
 Plugin Name: Automatic Ban IP
 Plugin Tag: tag
 Description: <p>Block IP addresses which are suspicious and try to post on your blog spam comments.</p><p>This plugin need that you create an account on the Honey Pot Project (https://www.projecthoneypot.org, free api) or that you install the Spam Captcha plugin.</p><p>In addition, if you want to geolocate the spammers your may create an account on (http://ipinfodb.com/, free api). Thus, you may display a world map with the concentration of spammers.</p><p>Spammers may be blocked either by PHP based restrictions (i.e. Wordpress generates a 403 page for such identified users) or by Apache based restriction (using Deny from in .htaccess file).</p><p>The Apache restriction is far more efficient when hundreds of hosts sent you spams in few minutes.</p>
-Version: 1.0.1
+Version: 1.0.2
 Framework: SL_Framework
 Author: SedLex
 Author URI: http://www.sedlex.fr/

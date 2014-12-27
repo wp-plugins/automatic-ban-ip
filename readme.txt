@@ -6,7 +6,7 @@ Author URI: http://www.sedlex.fr/
 Plugin URI: http://wordpress.org/plugins/automatic-ban-ip/
 Tags: tag
 Requires at least: 3.0
-Tested up to: 4.0.1
+Tested up to: 4.2
 Stable tag: trunk
 License: GPLv3
 
@@ -53,6 +53,10 @@ Have fun !
 
 == Changelog ==
 
+= 1.0.2 = 
+* Various enhancements
+* NEW : Add icons
+
 = 1.0.1 = 
 * Add Banners
 
@@ -62,4 +66,4 @@ Have fun !
 == Frequently Asked Questions ==
 
  
-InfoVersion:8e13d119c352dee83a9db847f9a907fe6c244ca5
+InfoVersion:0b63e109a4b428339d50a0383fe8728da112f1dd
