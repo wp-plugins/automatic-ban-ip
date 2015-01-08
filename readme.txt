@@ -4,7 +4,7 @@ Author: SedLex
 Contributors: SedLex
 Author URI: http://www.sedlex.fr/
 Plugin URI: http://wordpress.org/plugins/automatic-ban-ip/
-Tags: tag
+Tags: ban, ip, automatic, spam, comments, firewall, block
 Requires at least: 3.0
 Tested up to: 4.2
 Stable tag: trunk
@@ -66,4 +66,4 @@ Have fun !
 == Frequently Asked Questions ==
 
  
-InfoVersion:0b63e109a4b428339d50a0383fe8728da112f1dd
+InfoVersion:38c34f7a577085ceb9e448123a833360ec5bb636
