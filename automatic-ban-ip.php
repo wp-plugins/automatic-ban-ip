@@ -3,7 +3,7 @@
 Plugin Name: Automatic Ban IP
 Plugin Tag: ban, ip, automatic, spam, comments, firewall, block
 Description: <p>Block IP addresses which are suspicious and try to post on your blog spam comments.</p><p>This plugin need that you create an account on the Honey Pot Project (https://www.projecthoneypot.org, free api) or that you install the Spam Captcha plugin.</p><p>In addition, if you want to geolocate the spammers your may create an account on (http://ipinfodb.com/, free api). Thus, you may display a world map with the concentration of spammers.</p><p>Spammers may be blocked either by PHP based restrictions (i.e. Wordpress generates a 403 page for such identified users) or by Apache based restriction (using Deny from in .htaccess file).</p><p>The Apache restriction is far more efficient when hundreds of hosts sent you spams in few minutes.</p>
-Version: 1.0.2
+Version: 1.0.3
 Framework: SL_Framework
 Author: SedLex
 Author URI: http://www.sedlex.fr/
@@ -95,6 +95,20 @@ class automatic_ban_ip extends pluginSedLex {
 			switch_to_blog($old_blog);
 		} else {
 			$wpdb->query("DROP TABLE ".$wpdb->prefix . "pluginSL_" . 'automatic_ban_ip' ) ; 
+		}
+		
+		// DELETE FILES if needed
+		//SLFramework_Utils::rm_rec(WP_CONTENT_DIR."/sedlex/my-plugin/"); 
+		$plugins_all = 	get_plugins() ; 
+		$nb_SL = 0 ; 	
+		foreach($plugins_all as $url => $pa) {
+			$info = pluginSedlex::get_plugins_data(WP_PLUGIN_DIR."/".$url);
+			if ($info['Framework_Email']=="sedlex@sedlex.fr"){
+				$nb_SL++ ; 
+			}
+		}
+		if ($nb_SL==1) {
+			SLFramework_Utils::rm_rec(WP_CONTENT_DIR."/sedlex/"); 
 		}
 	}
 	
