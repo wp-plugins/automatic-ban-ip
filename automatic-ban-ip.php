@@ -3,7 +3,7 @@
 Plugin Name: Automatic Ban IP
 Plugin Tag: ban, ip, automatic, spam, comments, firewall, block
 Description: <p>Block IP addresses which are suspicious and try to post on your blog spam comments.</p><p>This plugin need that you create an account on the Honey Pot Project (https://www.projecthoneypot.org, free api) or that you install the Spam Captcha plugin.</p><p>In addition, if you want to geolocate the spammers your may create an account on (http://ipinfodb.com/, free api). Thus, you may display a world map with the concentration of spammers.</p><p>Spammers may be blocked either by PHP based restrictions (i.e. Wordpress generates a 403 page for such identified users) or by Apache based restriction (using Deny from in .htaccess file).</p><p>The Apache restriction is far more efficient when hundreds of hosts sent you spams in few minutes.</p>
-Version: 1.0.3
+Version: 1.0.4
 Framework: SL_Framework
 Author: SedLex
 Author URI: http://www.sedlex.fr/
@@ -429,59 +429,62 @@ class automatic_ban_ip extends pluginSedLex {
 	* @return array results from query
 	*/
 	function query($ip_address) {
-		// Validates the IP format
-		if (preg_match("/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/iU", $ip_address)) {
-			// Flips the script, err, IP address
-			$octets = explode('.', $ip_address);
-			krsort($octets);
-			$reversed_ip = implode('.', $octets);
-			// Performs the query
-			$results = dns_get_record($this->get_param("honey_key") . '.' . $reversed_ip . '.dnsbl.httpbl.org', DNS_A);
-			// Processes the results
-			if (isset($results[0]['ip'])) {
-				$results = explode('.', $results[0]['ip']);
-				if ($results[0] == 127) {
-					$results = array(
-						'last_activity' => $results[1],
-						'threat_score' => $results[2],
-						'categories' => $results[3],
-					);
-					// Creates an array of categories
-					switch ($results['categories']){
-						case 0:
-							$categories = array('Search Engine');
-							break;
-						case 1:
-							$categories = array('Suspicious');
-							break;
-						case 2:
-							$categories = array('Harvester');
-							break;
-						case 3:
-							$categories = array('Suspicious', 'Harvester');
-							break;
-						case 4:
-							$categories = array('Comment Spammer');
-							break;
-						case 5:
-							$categories = array('Suspicious', 'Comment Spammer');
-							break;
-						case 6:
-							$categories = array('Harvester', 'Comment Spammer');
-							break;
-						case 7:
-							$categories = array('Suspicious', 'Harvester', 'Comment Spammer');
-							break;
-						default:
-							$categories = array('Reserved for Future Use');
-							break;
+		
+		if (trim($this->get_param("honey_key"))!=""){
+			// Validates the IP format
+			if (preg_match("/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/iU", $ip_address)) {
+				// Flips the script, err, IP address
+				$octets = explode('.', $ip_address);
+				krsort($octets);
+				$reversed_ip = implode('.', $octets);
+				// Performs the query
+				$results = @dns_get_record($this->get_param("honey_key") . '.' . $reversed_ip . '.dnsbl.httpbl.org', DNS_A);
+				// Processes the results
+				if (isset($results[0]['ip'])) {
+					$results = explode('.', $results[0]['ip']);
+					if ($results[0] == 127) {
+						$results = array(
+							'last_activity' => $results[1],
+							'threat_score' => $results[2],
+							'categories' => $results[3],
+						);
+						// Creates an array of categories
+						switch ($results['categories']){
+							case 0:
+								$categories = array('Search Engine');
+								break;
+							case 1:
+								$categories = array('Suspicious');
+								break;
+							case 2:
+								$categories = array('Harvester');
+								break;
+							case 3:
+								$categories = array('Suspicious', 'Harvester');
+								break;
+							case 4:
+								$categories = array('Comment Spammer');
+								break;
+							case 5:
+								$categories = array('Suspicious', 'Comment Spammer');
+								break;
+							case 6:
+								$categories = array('Harvester', 'Comment Spammer');
+								break;
+							case 7:
+								$categories = array('Suspicious', 'Harvester', 'Comment Spammer');
+								break;
+							default:
+								$categories = array('Reserved for Future Use');
+								break;
+						}
+						$results['categories'] = $categories;
+						return $results;
 					}
-					$results['categories'] = $categories;
-					return $results;
 				}
+			} else {
+				return array('error' => 'Invalid IP address.');
 			}
-		} else {
-			return array('error' => 'Invalid IP address.');
 		}
 		return false;
 	}

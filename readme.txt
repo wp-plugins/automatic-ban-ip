@@ -53,6 +53,9 @@ Have fun !
 
 == Changelog ==
 
+= 1.0.4 = 
+* BUG: check if any key is specify before checking
+
 = 1.0.3 = 
 * NEW: deletion of temp file upon desinstall
 
@@ -69,4 +72,4 @@ Have fun !
 == Frequently Asked Questions ==
 
  
-InfoVersion:afa6d7b6fd85209d53450224b11e73d3a09dcfe1
+InfoVersion:7e9e746e1f31616db856cf709c9915ebe4d2049e
