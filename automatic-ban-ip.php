@@ -3,7 +3,7 @@
 Plugin Name: Automatic Ban IP
 Plugin Tag: ban, ip, automatic, spam, comments, firewall, block
 Description: <p>Block IP addresses which are suspicious and try to post on your blog spam comments.</p><p>This plugin need that you create an account on the Honey Pot Project (https://www.projecthoneypot.org, free api) or that you install the Spam Captcha plugin.</p><p>In addition, if you want to geolocate the spammers your may create an account on (http://ipinfodb.com/, free api). Thus, you may display a world map with the concentration of spammers.</p><p>Spammers may be blocked either by PHP based restrictions (i.e. Wordpress generates a 403 page for such identified users) or by Apache based restriction (using Deny from in .htaccess file).</p><p>The Apache restriction is far more efficient when hundreds of hosts sent you spams in few minutes.</p>
-Version: 1.0.4
+Version: 1.0.5
 Framework: SL_Framework
 Author: SedLex
 Author URI: http://www.sedlex.fr/
@@ -606,8 +606,9 @@ class automatic_ban_ip extends pluginSedLex {
 				$params->add_comment(sprintf(__("Default value is %s",  $this->pluginID), "<code>25</code>")) ; 
 				
 				$params->add_title(__('Block via .htaccess',  $this->pluginID)) ; 
-				$params->add_param('htaccess', sprintf(__('Number of IP should be added to the %s file:',  $this->pluginID), "Honey Pot Project")) ; 
+				$params->add_param('htaccess', sprintf(__('Number of IP should be added to the %s file:',  $this->pluginID), ".htaccess")) ; 
 				$params->add_comment(sprintf(__("If this number is %s, thus no IP is added",  $this->pluginID), "<code>0</code>")) ; 
+				$params->add_comment(sprintf(__("Only the last IP addresses that connect to your site are put in the %s file. If a new spammer connects to your site, its IP will be added to %s file while another IP is removed (thus there is a circular process)",  $this->pluginID), ".htaccess", ".htaccess")) ; 
 				
 				$params->add_title(__('Geolocate spammer',  $this->pluginID)) ; 
 				$params->add_param('geolocate_key', sprintf(__('If you want to geolocate spammer on a map, please enter you %s key:',  $this->pluginID), "<code>IPInfoDb</code>")) ; 

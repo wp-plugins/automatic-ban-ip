@@ -53,6 +53,9 @@ Have fun !
 
 == Changelog ==
 
+= 1.0.5 = 
+* MINOR BUG: a comment was erroneous in the parameter tab
+
 = 1.0.4 = 
 * BUG: check if any key is specify before checking
 
@@ -72,4 +75,4 @@ Have fun !
 == Frequently Asked Questions ==
 
  
-InfoVersion:7e9e746e1f31616db856cf709c9915ebe4d2049e
+InfoVersion:8b5ecd6096784513b1459586f83b3110a68aa74b

@@ -1,0 +1,177 @@
+Content-Transfer-Encoding: 8bit
+
+#: automatic-ban-ip.php:262
+#@ automatic_ban_ip
+msgid "title"
+msgstr ""
+
+#: automatic-ban-ip.php:521
+#@ automatic_ban_ip
+msgid "Geolocalisation of Banned Spammers"
+msgstr ""
+
+#: automatic-ban-ip.php:534
+#@ automatic_ban_ip
+msgid "Blocked IP"
+msgstr ""
+
+#: automatic-ban-ip.php:534
+#@ automatic_ban_ip
+msgid "Reason for the blocking"
+msgstr ""
+
+#: automatic-ban-ip.php:534
+#@ automatic_ban_ip
+msgid "Geolocation"
+msgstr ""
+
+#: automatic-ban-ip.php:534
+#@ automatic_ban_ip
+msgid "Date"
+msgstr ""
+
+#: automatic-ban-ip.php:598
+#@ automatic_ban_ip
+msgid "Ban IP"
+msgstr ""
+
+#: automatic-ban-ip.php:602
+#@ automatic_ban_ip
+msgid "HoneyPot Projet"
+msgstr ""
+
+#: automatic-ban-ip.php:603
+#@ automatic_ban_ip
+msgid "Your API key for the %s:"
+msgstr ""
+
+#: automatic-ban-ip.php:604
+#@ automatic_ban_ip
+msgid "Get your API key on %s"
+msgstr ""
+
+#: automatic-ban-ip.php:605
+#@ automatic_ban_ip
+msgid "The minimum threat score to block:"
+msgstr ""
+
+#: automatic-ban-ip.php:606
+#@ automatic_ban_ip
+msgid "Default value is %s"
+msgstr ""
+
+#: automatic-ban-ip.php:608
+#@ automatic_ban_ip
+msgid "Block via .htaccess"
+msgstr ""
+
+#: automatic-ban-ip.php:609
+#@ automatic_ban_ip
+msgid "Number of IP should be added to the %s file:"
+msgstr ""
+
+#: automatic-ban-ip.php:610
+#@ automatic_ban_ip
+msgid "If this number is %s, thus no IP is added"
+msgstr ""
+
+#: automatic-ban-ip.php:611
+#@ automatic_ban_ip
+msgid "Only the last IP addresses that connect to your site are put in the %s file. If a new spammer connects to your site, its IP will be added to %s file while another IP is removed (thus there is a circular process)"
+msgstr ""
+
+#: automatic-ban-ip.php:613
+#@ automatic_ban_ip
+msgid "Geolocate spammer"
+msgstr ""
+
+#: automatic-ban-ip.php:614
+#@ automatic_ban_ip
+msgid "If you want to geolocate spammer on a map, please enter you %s key:"
+msgstr ""
+
+#: automatic-ban-ip.php:618
+#@ automatic_ban_ip
+msgid "You have to create your own key on %s."
+msgstr ""
+
+#: automatic-ban-ip.php:622
+#@ automatic_ban_ip
+msgid "You API key appears to be correct."
+msgstr ""
+
+#: automatic-ban-ip.php:623
+#@ automatic_ban_ip
+msgid "Your server appears to be located in %s (your server's IP is %s)."
+msgstr ""
+
+#: automatic-ban-ip.php:625
+#@ automatic_ban_ip
+msgid "There was a problem while contacting the server."
+msgstr ""
+
+#: automatic-ban-ip.php:634
+#@ automatic_ban_ip
+msgid "Parameters"
+msgstr ""
+
+#: automatic-ban-ip.php:637
+#@ automatic_ban_ip
+msgid "This plugin may block spammer and suspicious host that connect to your server."
+msgstr ""
+
+#: automatic-ban-ip.php:638
+#@ automatic_ban_ip
+msgid "Purpose of that plugin"
+msgstr ""
+
+#: automatic-ban-ip.php:640
+#@ automatic_ban_ip
+msgid "Spammers may be blocked either by PHP based restrictions (i.e. Wordpress generates a 403 page for such identified users) or by Apache based restriction (using %s in %s file)."
+msgstr ""
+
+#: automatic-ban-ip.php:641
+#@ automatic_ban_ip
+msgid "The Apache restriction is far more efficient when hundreds of hosts sent you spams in few minutes."
+msgstr ""
+
+#: automatic-ban-ip.php:642
+#@ automatic_ban_ip
+msgid "Nevertheless the Apache restrictions method does not apply for all configurations."
+msgstr ""
+
+#: automatic-ban-ip.php:643
+#@ automatic_ban_ip
+msgid "Method to block spammers"
+msgstr ""
+
+#: automatic-ban-ip.php:645
+#@ automatic_ban_ip
+msgid "Spammers may be detected either by using the %s database or by using the %s plugin (need to be installed and configured accordingly)."
+msgstr ""
+
+#: automatic-ban-ip.php:646
+#@ automatic_ban_ip
+msgid "Method to detect spammers"
+msgstr ""
+
+#: automatic-ban-ip.php:651
+#@ automatic_ban_ip
+msgid "How To"
+msgstr ""
+
+#: automatic-ban-ip.php:660
+#@ automatic_ban_ip
+msgid "Manage translations"
+msgstr ""
+
+#: automatic-ban-ip.php:667
+#@ automatic_ban_ip
+msgid "Give feedback"
+msgstr ""
+
+#: automatic-ban-ip.php:675
+#@ automatic_ban_ip
+msgid "Other plugins"
+msgstr ""
+
