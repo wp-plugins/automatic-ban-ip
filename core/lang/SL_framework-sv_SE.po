@@ -1,0 +1,61 @@
+msgid ""
+msgstr ""
+"Generated: SL Framework (http://www.sedlex.fr)\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2015-04-20T14:56:26+00:00\n"
+"Last-Translator: Lord_Lucifer <admin@adult-photobank.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: Swedish\n"
+"X-Poedit-Country: Sweden\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes\n"
+
+msgid "About SL plugins..."
+msgstr "Om Sl plugins"
+
+msgid "About..."
+msgstr "Om...."
+
+msgid "Settings"
+msgstr "Inställningar"
+
+msgid "Log options"
+msgstr "Logg inställningar"
+
+msgid "What is the debug level:"
+msgstr "Vad är debug nivån:"
+
+msgid "See the debug logs"
+msgstr "Se debug loggen:"
+
+msgid "1=log only the critical errors;"
+msgstr "1= Logga endast kritiska fel."
+
+msgid "2=log only the critical errors and the standard errors;"
+msgstr "2= Logga endast kritiska fel och standard fel"
+
+msgid "3=log only the critical errors, the standard errors and the warnings;"
+msgstr "3= Logga endast kritiska fel , standard fel och varningar"
+
+msgid "4=log information;"
+msgstr "4= logg information"
+
+msgid "Multisite Management"
+msgstr "Multisite Management"
+
+msgid "Location of the SL plugins"
+msgstr "Placering av SL tillägg:"
+
+msgid "Where do you want to display the SL plugins:"
+msgstr "Vart vill du se informationen av SL tillägg:"
+

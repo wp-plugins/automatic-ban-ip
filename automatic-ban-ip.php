@@ -3,7 +3,7 @@
 Plugin Name: Automatic Ban IP
 Plugin Tag: ban, ip, automatic, spam, comments, firewall, block
 Description: <p>Block IP addresses which are suspicious and try to post on your blog spam comments.</p><p>This plugin need that you create an account on the Honey Pot Project (https://www.projecthoneypot.org, free api) or that you install the Spam Captcha plugin.</p><p>In addition, if you want to geolocate the spammers your may create an account on (http://ipinfodb.com/, free api). Thus, you may display a world map with the concentration of spammers.</p><p>Spammers may be blocked either by PHP based restrictions (i.e. Wordpress generates a 403 page for such identified users) or by Apache based restriction (using Deny from in .htaccess file).</p><p>The Apache restriction is far more efficient when hundreds of hosts sent you spams in few minutes.</p>
-Version: 1.0.5
+Version: 1.0.6
 Framework: SL_Framework
 Author: SedLex
 Author URI: http://www.sedlex.fr/
@@ -59,8 +59,6 @@ class automatic_ban_ip extends pluginSedLex {
 		
 		$this->testIfBlocked() ; 
 		
-		add_action('comment_post', array(&$this, 'detect_spammeur'), 1000);
-
 		// activation and deactivation functions (Do not modify)
 		register_activation_hook(__FILE__, array($this,'install'));
 		register_deactivation_hook(__FILE__, array($this,'deactivate'));
@@ -183,14 +181,14 @@ class automatic_ban_ip extends pluginSedLex {
 			$this->add_js(plugin_dir_url("/").'/'.str_replace(basename( __FILE__),"",plugin_basename( __FILE__)) .'js/jquery-jvectormap-world-mill-en.js') ; 
 			
 			ob_start();
-				$results = $wpdb->get_results("SELECT geolocate, count(*) as nombre FROM ".$this->table_name." GROUP BY geolocate") ; 
+				$results = $wpdb->get_results("SELECT geolocate_state, count(*) as nombre FROM ".$this->table_name." GROUP BY geolocate_state") ; 
 				echo "\r\nvar gdpDataSpammer = {\r\n" ; 
 				$first = true;
 				foreach ($results as $r){
 					if (!$first){
 						echo ", " ; 
 					}
-					$rus = @unserialize($r->geolocate) ; 
+					$rus = @unserialize($r->geolocate_state) ; 
 					if (is_array($rus)){
 						$first = false ; 
 						echo '"'.$rus['countryCode'].'":'.$r->nombre ; 
@@ -299,10 +297,13 @@ class automatic_ban_ip extends pluginSedLex {
 			case 'htaccess' 		: return 0 		; break ; 
 			
 			case 'geolocate_key'		: return "" ; break ; 
+
+			case 'nb_tested'		: return 0 ; break ; 
 			
 		}
 		return null ;
 	}
+	
 	/** ====================================================================================================================================================
 	* The admin configuration page
 	* This function will be called when you select the plugin in the admin backend 
@@ -336,6 +337,7 @@ class automatic_ban_ip extends pluginSedLex {
 		}
 
 		$result = $this->query($hostname) ; 
+		
 		if (isset($result['threat_score'])) {
 			if ($result['threat_score']>=$this->get_param('threat_score')) {
 				// We create a new entry
@@ -381,6 +383,7 @@ class automatic_ban_ip extends pluginSedLex {
 	/**
 	* Update
 	*/
+	
 	function updateHtAccess() {
 		global $wpdb ; 
 		$ips = $wpdb->get_results("SELECT ip FROM ".$this->table_name." ORDER BY time DESC LIMIT ".$this->get_param('htaccess')) ; 
@@ -439,7 +442,11 @@ class automatic_ban_ip extends pluginSedLex {
 				$reversed_ip = implode('.', $octets);
 				// Performs the query
 				$results = @dns_get_record($this->get_param("honey_key") . '.' . $reversed_ip . '.dnsbl.httpbl.org', DNS_A);
+				
 				// Processes the results
+				$nb_tested = $this->get_param('nb_tested') ; 
+				$this->set_param('nb_tested', $nb_tested+1) ; 
+		
 				if (isset($results[0]['ip'])) {
 					$results = explode('.', $results[0]['ip']);
 					if ($results[0] == 127) {
@@ -480,10 +487,18 @@ class automatic_ban_ip extends pluginSedLex {
 						}
 						$results['categories'] = $categories;
 						return $results;
+					} else {
+						return array('error' => 'Does not understand the response (i.e. different from 127).', 'raw'=>$results[0]) ;
+					}
+				} else {
+					if ((is_array($results)) || (count($results)==0)) {
+						return array('ok' => 'The IP has not threat level') ; // ce que l'IP ne presente pas de risuqe
+					} else {
+						return array('error' => 'Does not understand the response.', 'raw'=>$results, "url"=>$this->get_param("honey_key") . '.' . $reversed_ip . '.dnsbl.httpbl.org') ;
 					}
 				}
 			} else {
-				return array('error' => 'Invalid IP address.');
+				return array('error' => 'Invalid IP address.', "url"=>$this->get_param("honey_key") . '.' . $reversed_ip . '.dnsbl.httpbl.org');
 			}
 		}
 		return false;
@@ -522,13 +537,16 @@ class automatic_ban_ip extends pluginSedLex {
 					echo $box->flush() ; 
 				}
 				
+				$nb_tested = $this->get_param('nb_tested') ; 
+				echo "<p>".sprintf(__("%s IP has been tested", $this->pluginID), $nb_tested)."</p>" ; 
+				
 				$maxnb = 20 ; 
 				$table = new SLFramework_Table(0, $maxnb, true, true) ; 
 				
 				// on construit le filtre pour la requete
 				$filter = explode(" ", $table->current_filter()) ; 
 																
-				$count = $wpdb->get_var("SELECT count(*) FROM ".$this->table_name." WHERE ip like '%".str_replace("'","",$table->current_filter())."%' OR reason like '%".str_replace("'","",$table->current_filter())."%' OR time like '%".str_replace("'","",$table->current_filter())."%' OR geolocate like '%".str_replace("'","",$table->current_filter())."%'") ;
+				$count = $wpdb->get_var("SELECT count(*) FROM ".$this->table_name." WHERE ip like '%".str_replace("'","",$table->current_filter())."%' OR reason like '%".str_replace("'","",$table->current_filter())."%' OR time like '%".str_replace("'","",$table->current_filter())."%' OR geolocate_state like '%".str_replace("'","",$table->current_filter())."%'") ;
 				$table->set_nb_all_Items($count) ; 
 				
 				$table->title(array(__('Blocked IP', $this->pluginID), __('Reason for the blocking', $this->pluginID), __('Geolocation', $this->pluginID), __('Date', $this->pluginID)) ) ; 
@@ -540,7 +558,7 @@ class automatic_ban_ip extends pluginSedLex {
 				} elseif ($table->current_ordercolumn()==2) {
 					$order .= "reason" ;  
 				} elseif ($table->current_ordercolumn()==3) {
-					$order .= "geolocate" ;  
+					$order .= "geolocate_state" ;  
 				} else { 
 					$order .= "time" ;  
 				}				
@@ -555,7 +573,7 @@ class automatic_ban_ip extends pluginSedLex {
 					$limit =  " LIMIT ".(($table->current_page()-1)*$maxnb).",".$maxnb ; 
 				}
 				
-				$results = $wpdb->get_results("SELECT ip, reason, geolocate, time FROM ".$this->table_name." WHERE ip like '%".str_replace("'","",$table->current_filter())."%' OR reason like '%".str_replace("'","",$table->current_filter())."%' OR time like '%".str_replace("'","",$table->current_filter())."%' OR geolocate like '%".str_replace("'","",$table->current_filter())."%'".$order.$limit) ; 
+				$results = $wpdb->get_results("SELECT ip, reason, geolocate_state, time FROM ".$this->table_name." WHERE ip like '%".str_replace("'","",$table->current_filter())."%' OR reason like '%".str_replace("'","",$table->current_filter())."%' OR time like '%".str_replace("'","",$table->current_filter())."%' OR geolocate_state like '%".str_replace("'","",$table->current_filter())."%'".$order.$limit) ; 
 										
 				$ligne=0 ; 
 				foreach ($results as $r) {
@@ -579,21 +597,18 @@ class automatic_ban_ip extends pluginSedLex {
 						echo $reason ; 
 					$cel2 = new adminCell(ob_get_clean()) ; 
 					
-					$geo = @unserialize($r->geolocate) ; 
+					$geo = @unserialize($r->geolocate_state) ; 
 					if (is_array($geo)) {
 						$geolocate = $geo['countryName'] ; 
 					} else {
-						$geolocate = $r->geolocate ; 
+						$geolocate = $r->geolocate_state ; 
 					}
 					$cel3 = new adminCell("<p>".$geolocate."</p>") ; 				
 					$cel4 = new adminCell("<p>".$r->time."</p>") ; 				
 				
 					$table->add_line(array($cel1, $cel2, $cel3, $cel4), $ligne) ; 
 				}
-				echo $table->flush() ; 
-				
-				
-				
+				echo $table->flush() ; 				
 				
 			$tabs->add_tab(__('Ban IP',  $this->pluginID), ob_get_clean()) ; 	
 
@@ -602,6 +617,32 @@ class automatic_ban_ip extends pluginSedLex {
 				$params->add_title(__('HoneyPot Projet',  $this->pluginID)) ; 
 				$params->add_param('honey_key', sprintf(__('Your API key for the %s:',  $this->pluginID), "Honey Pot Project")) ; 
 				$params->add_comment(sprintf(__("Get your API key on %s",  $this->pluginID), "<a href='https://www.projecthoneypot.org/'>Honey Pot Project</a>")) ; 
+				
+				$hostname = $_SERVER['REMOTE_ADDR'];
+				$hostname = "89.105.158.244";
+				
+				if (preg_match("/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/iU", $hostname)) {
+					$result = $this->query($hostname) ;
+					
+					if (isset($result['threat_score'])) {
+						$params->add_comment(sprintf(__("For information, the threat associated with your ip (%s) is %s",  $this->pluginID), $hostname, $result['threat_score'])) ; 
+					} elseif (isset($result['error'])) { 
+						$params->add_comment(sprintf(__("An error occured while retrieving the info before %s : %s",  $this->pluginID), "<a href='https://www.projecthoneypot.org/'>Honey Pot Project</a>", $result['error'])) ; 
+						if (isset($result['raw'])) {
+							ob_start() ; 
+								var_dump($result['raw']) ; 
+							$params->add_comment(sprintf(__("Here is the returned: %s",  $this->pluginID), ob_get_clean())) ; 
+						}
+						if (isset($result['url'])) {
+							$params->add_comment(sprintf(__("The requested URL was: %s",  $this->pluginID), $result['url'])) ; 
+						}
+					} elseif (isset($result['ok'])) { 
+						$params->add_comment($result['ok']) ; 
+					}
+				} else {
+					$params->add_comment(sprintf(__("Your IP (%s) is not compatible with %s",  $this->pluginID), $hostname, "<a href='https://www.projecthoneypot.org/'>Honey Pot Project</a>")) ; 
+				}
+
 				$params->add_param('threat_score', sprintf(__('The minimum threat score to block:',  $this->pluginID), "Honey Pot Project")) ; 
 				$params->add_comment(sprintf(__("Default value is %s",  $this->pluginID), "<code>25</code>")) ; 
 				
@@ -726,7 +767,7 @@ class automatic_ban_ip extends pluginSedLex {
 						
 						// On le prepare pour la BDD
 						if ($serialize_for_database){
-							$geolocate_data = ", geolocate='".esc_sql(@serialize($geolocate_data))."'" ; 
+							$geolocate_data = ", geolocate_state='".esc_sql(@serialize($geolocate_data))."'" ; 
 						}
 					} else {
 						if (!$serialize_for_database){

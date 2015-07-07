@@ -182,6 +182,16 @@ if (!class_exists('pluginSedLex')) {
 			
 						require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 						dbDelta($sql);
+						
+						// On montre les erreurs en cas de besoin
+						if ($wpdb->last_error) {
+							ob_start();
+								var_dump($wpdb->last_query) ; 
+							echo 'SQL_Error=' . ob_get_clean() ; 
+							ob_start() ; 
+								var_dump($wpdb->last_error) ; 
+							echo ' ==> ' . ob_get_clean() ;  
+						} 
 			
 						add_option("db_version", $db_version);
 					

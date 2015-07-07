@@ -4,11 +4,12 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2014-06-12T14:26:27+00:00\n"
+"PO-Revision-Date: 2015-04-30T14:14:00+00:00\n"
 "Last-Translator: MarcelJansen <http://caddvision.org>\n"
 "Last-Translator: Erik <www.digihulpdienst.nl>\n"
 "Last-Translator: Mark <http://www.pandoraz.com>\n"
 "Last-Translator: infotittenraus.com <http://tittenraus.com/http://AssTheBest.com/>\n"
+"Last-Translator: Stefan <stefan@refreshseo.nl>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -52,9 +53,6 @@ msgstr "3=noteer alleen de kritische fouten, standaard fouten en de waarschuwing
 
 msgid "4=log information;"
 msgstr "4=log informatie;"
-
-msgid "5=log verbose;"
-msgstr ""
 
 msgid "Multisite Management"
 msgstr "Multisite Beheer"
@@ -439,4 +437,7 @@ msgstr "MB"
 
 msgid "GB"
 msgstr "GB"
+
+msgid "5=log verbose;"
+msgstr "5=log breedsprakig"
 

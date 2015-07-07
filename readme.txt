@@ -29,6 +29,7 @@ The Apache restriction is far more efficient when hundreds of hosts sent you spa
 = Localization =
 
 * English (United States), default language
+* Japanese (Japan) translation provided by 
 
 = Features of the framework =
 
@@ -53,6 +54,9 @@ Have fun !
 
 == Changelog ==
 
+= 1.0.6 = 
+* BUG: a table field was incorrectly named
+
 = 1.0.5 = 
 * MINOR BUG: a comment was erroneous in the parameter tab
 
@@ -75,4 +79,4 @@ Have fun !
 == Frequently Asked Questions ==
 
  
-InfoVersion:8b5ecd6096784513b1459586f83b3110a68aa74b
+InfoVersion:8abbec3097c0cc731a200281c2429d52af4c8692

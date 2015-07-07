@@ -1,0 +1,127 @@
+msgid ""
+msgstr ""
+"Generated: SL Framework (http://www.sedlex.fr)\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2015-06-26T03:56:59+00:00\n"
+"Last-Translator: OsamuKudo <kudo@inforent.jp>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-Language: Japanese\n"
+"X-Poedit-Country: Japan\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes\n"
+
+msgid "title"
+msgstr "題名"
+
+msgid "Geolocalisation of Banned Spammers"
+msgstr "拒否されたスパマーの国"
+
+msgid "Blocked IP"
+msgstr "遮断したIP"
+
+msgid "Reason for the blocking"
+msgstr "遮断する理由"
+
+msgid "Geolocation"
+msgstr "国"
+
+msgid "Date"
+msgstr "日付"
+
+msgid "Ban IP"
+msgstr "拒否するIP"
+
+msgid "HoneyPot Projet"
+msgstr "罠の仕掛け"
+
+msgid "Your API key for the %s:"
+msgstr "%sに設定するAPIキー"
+
+msgid "Get your API key on %s"
+msgstr "%sに設定するAPIキーを取得する"
+
+msgid "The minimum threat score to block:"
+msgstr "遮断すべき最小の脅威点"
+
+msgid "Default value is %s"
+msgstr "初期設定の値は%sです"
+
+msgid "Block via .htaccess"
+msgstr ".htaccessを利用した遮断"
+
+msgid "Number of IP should be added to the %s file:"
+msgstr "%s file:に加えるIPの数"
+
+msgid "If this number is %s, thus no IP is added"
+msgstr "%sであればIPの数に加えない"
+
+msgid "Only the last IP addresses that connect to your site are put in the %s file. If a new spammer connects to your site, its IP will be added to %s file while another IP is removed (thus there is a circular process)"
+msgstr "サイトに接続した最後のIPが%s fileに書き加えられます。もし新たにサイトに接続したスパマーがみつかれば、%s ファイルに書き加えられます。"
+
+msgid "Geolocate spammer"
+msgstr "スパマーの国を特定する"
+
+msgid "If you want to geolocate spammer on a map, please enter you %s key:"
+msgstr "もし、地図上でスパマーの国を特定したければ、%sキーを入力してください"
+
+msgid "You have to create your own key on %s."
+msgstr "%sキーを作成する必要があります"
+
+msgid "You API key appears to be correct."
+msgstr "APIキーを正しく記入します"
+
+msgid "Your server appears to be located in %s (your server's IP is %s)."
+msgstr "あなたのサーバーは%sの位置として表記されます。（あなたのサーバーのIPは%sです）"
+
+msgid "There was a problem while contacting the server."
+msgstr "サーバーに接続中に問題が発生しました"
+
+msgid "Parameters"
+msgstr "変数"
+
+msgid "This plugin may block spammer and suspicious host that connect to your server."
+msgstr "このプラグインは、あなたのサーバーに接続しようとするスパマーや疑わしいホストを遮断します"
+
+msgid "Purpose of that plugin"
+msgstr "プラグインの目的"
+
+msgid "Spammers may be blocked either by PHP based restrictions (i.e. Wordpress generates a 403 page for such identified users) or by Apache based restriction (using %s in %s file)."
+msgstr "スパマーはPHPベースの制限もしくはApacheベースの制限のどちらかにより遮断されます(%sファイルの中で%sを使う)"
+
+msgid "The Apache restriction is far more efficient when hundreds of hosts sent you spams in few minutes."
+msgstr "数分間に何百ものホストがスパムを送る時、Apacheの制限はより効率的になります。"
+
+msgid "Nevertheless the Apache restrictions method does not apply for all configurations."
+msgstr "しかしながら、Apacheの制限方法が全ての定義には適用するとは限りません。"
+
+msgid "Method to block spammers"
+msgstr "スパマーを遮断する方法"
+
+msgid "Spammers may be detected either by using the %s database or by using the %s plugin (need to be installed and configured accordingly)."
+msgstr "スパマーは%sのデーターベースを利用するか%sプラグインを利用するかのいずれかにより検知されます。"
+
+msgid "Method to detect spammers"
+msgstr "スパマーの検知方法"
+
+msgid "How To"
+msgstr "やり方"
+
+msgid "Manage translations"
+msgstr "翻訳管理"
+
+msgid "Give feedback"
+msgstr "フィードバックをする"
+
+msgid "Other plugins"
+msgstr "他のプラグイン"
+

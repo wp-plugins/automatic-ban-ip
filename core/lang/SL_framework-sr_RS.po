@@ -1,0 +1,43 @@
+msgid ""
+msgstr ""
+"Generated: SL Framework (http://www.sedlex.fr)\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2015-06-11T15:30:43+00:00\n"
+"Last-Translator: Domenac <seo4url.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-Language: Serbian\n"
+"X-Poedit-Country: Serbia\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes\n"
+
+msgid "Description"
+msgstr "Opis"
+
+msgid "Please see below:"
+msgstr "Molim vas pogledajte dole"
+
+msgid "Standard"
+msgstr "Standard"
+
+msgid "under Tools"
+msgstr "Ispod alatki"
+
+msgid "Translators"
+msgstr "Prevodioci"
+
+msgid "Modify"
+msgstr "Promeni"
+
+msgid "Add"
+msgstr "Dodaj"
+
